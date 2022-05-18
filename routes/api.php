@@ -32,7 +32,8 @@ Route::name('api.')
     ->middleware('auth:sanctum')
     ->group(function () {
         Route::apiResource('transactions', TransactionController::class);
-
+        Route::get('/transactions/{id}/update', [TransactionController::class, 'update']);
+        Route::post('/transactions/{id}/destroy', [TransactionController::class, 'destroy']);
         Route::apiResource('categories', CategoryController::class);
 
         // Category Transactions

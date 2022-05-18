@@ -9,6 +9,7 @@ use App\Http\Resources\TransactionResource;
 use App\Http\Resources\TransactionCollection;
 use App\Http\Requests\TransactionStoreRequest;
 use App\Http\Requests\TransactionUpdateRequest;
+use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
@@ -89,12 +90,14 @@ class TransactionController extends Controller
      * @param \App\Models\Transaction $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Transaction $transaction)
+    public function destroy(Request $request,  Transaction $transaction)
     {
-        $this->authorize('delete', $transaction);
 
-        $transaction->delete();
+        $this->authorize('delete', Transaction::class);
 
+        $id = $request->id;
+        DB::table('transactions')->where('id', $id)->delete();
+        
         return response()->noContent();
     }
 }
