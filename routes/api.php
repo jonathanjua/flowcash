@@ -34,7 +34,10 @@ Route::name('api.')
         Route::apiResource('transactions', TransactionController::class);
         Route::post('/transactions/{id}/update', [TransactionController::class, 'update']);
         Route::post('/transactions/{id}/destroy', [TransactionController::class, 'destroy']);
+
         Route::apiResource('categories', CategoryController::class);
+        Route::post('/categories/{id}/update', [CategoryController::class, 'update']);
+        Route::post('/categories/{id}/destroy', [CategoryController::class, 'destroy']);
 
         // Category Transactions
         Route::get('/categories/{category}/transactions', [
@@ -47,7 +50,9 @@ Route::name('api.')
         ])->name('categories.transactions.store');
 
         Route::apiResource('users', UserController::class);
-
+        Route::post('/users/{id}/update', [UserController::class, 'update']);
+        Route::post('/users/{id}/destroy', [UserController::class, 'destroy']);
+        
         // User Transactions
         Route::get('/users/{user}/transactions', [
             UserTransactionsController::class,
