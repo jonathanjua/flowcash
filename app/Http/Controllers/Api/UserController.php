@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UserCollection;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -76,7 +77,9 @@ class UserController extends Controller
             $validated['password'] = Hash::make($validated['password']);
         }
 
-        $user->update($validated);
+        // $user->update($validated);
+        $id = $request->id;
+        DB::table('users')->where('id', $id)->update($validated);
 
         return new UserResource($user);
     }
@@ -90,7 +93,9 @@ class UserController extends Controller
     {
         $this->authorize('delete', $user);
 
-        $user->delete();
+        // $user->delete();
+        $id = $request->id;
+        DB::table('users')->where('id', $id)->delete();
 
         return response()->noContent();
     }

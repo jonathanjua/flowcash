@@ -9,6 +9,7 @@ use App\Http\Resources\CategoryResource;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Requests\CategoryStoreRequest;
 use App\Http\Requests\CategoryUpdateRequest;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -67,7 +68,9 @@ class CategoryController extends Controller
 
         $validated = $request->validated();
 
-        $category->update($validated);
+        $id = $request->id;
+        DB::table('categories')->where('id', $id)->update($validated);
+        // $category->update($validated);
 
         return new CategoryResource($category);
     }
@@ -81,7 +84,9 @@ class CategoryController extends Controller
     {
         $this->authorize('delete', $category);
 
-        $category->delete();
+        // $category->delete();
+        $id = $request->id;
+        DB::table('categories')->where('id', $id)->delete();
 
         return response()->noContent();
     }

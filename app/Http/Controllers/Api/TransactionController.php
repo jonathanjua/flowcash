@@ -80,7 +80,11 @@ class TransactionController extends Controller
 
         $validated = $request->validated();
 
-        $transaction->update($validated);
+        $id = $request->id;
+        
+        DB::table('transactions')->where('id', $id)->update($validated);
+
+        // $transaction->update($validated);
 
         return new TransactionResource($transaction);
     }
@@ -93,11 +97,11 @@ class TransactionController extends Controller
     public function destroy(Request $request,  Transaction $transaction)
     {
 
-        $this->authorize('delete', Transaction::class);
+        $this->authorize('delete', $transaction);
 
         $id = $request->id;
         DB::table('transactions')->where('id', $id)->delete();
-        
+
         return response()->noContent();
     }
 }
