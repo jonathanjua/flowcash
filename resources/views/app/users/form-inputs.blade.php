@@ -32,4 +32,12 @@
             :required="!$editing"
         ></x-inputs.password>
     </x-inputs.group>
+
+    <x-inputs.group class="w-full">
+        <x-inputs.checkbox
+            name="administrator"
+            label="Administrator"
+            :checked="old('administrator', ($editing ? $user->administrator : 0))"
+        ></x-inputs.checkbox>
+    </x-inputs.group>
 </div>

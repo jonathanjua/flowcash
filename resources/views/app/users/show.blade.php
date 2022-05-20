@@ -27,6 +27,12 @@
                         </h5>
                         <span>{{ $user->email ?? '-' }}</span>
                     </div>
+                    <div class="mb-4">
+                        <h5 class="font-medium text-gray-700">
+                            @lang('crud.users.inputs.administrator')
+                        </h5>
+                        <span>{{ $user->administrator ?? '-' }}</span>
+                    </div>
                 </div>
 
                 <div class="mt-10">

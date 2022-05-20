@@ -55,6 +55,9 @@
                                 <th class="px-4 py-3 text-left">
                                     @lang('crud.users.inputs.email')
                                 </th>
+                                <th class="px-4 py-3 text-left">
+                                    @lang('crud.users.inputs.administrator')
+                                </th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -66,6 +69,9 @@
                                 </td>
                                 <td class="px-4 py-3 text-left">
                                     {{ $user->email ?? '-' }}
+                                </td>
+                                <td class="px-4 py-3 text-left">
+                                    {{ $user->administrator ?? '-' }}
                                 </td>
                                 <td
                                     class="px-4 py-3 text-center"
@@ -132,7 +138,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="3">
+                                <td colspan="4">
                                     @lang('crud.common.no_items_found')
                                 </td>
                             </tr>
@@ -140,7 +146,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="3">
+                                <td colspan="4">
                                     <div class="mt-10 px-4">
                                         {!! $users->render() !!}
                                     </div>

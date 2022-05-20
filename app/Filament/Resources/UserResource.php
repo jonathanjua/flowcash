@@ -6,6 +6,7 @@ use App\Models\User;
 use Filament\{Tables, Forms};
 use Filament\Resources\{Form, Table, Resource};
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\UserResource\Pages;
@@ -17,6 +18,8 @@ class UserResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    protected static bool $shouldRegisterNavigation = false;
 
     public static function form(Form $form): Form
     {
@@ -51,6 +54,14 @@ class UserResource extends Resource
                         'md' => 12,
                         'lg' => 12,
                     ]),
+
+                Toggle::make('administrator')
+                    ->rules(['required', 'boolean'])
+                    ->columnSpan([
+                        'default' => 12,
+                        'md' => 12,
+                        'lg' => 12,
+                    ]),
             ]),
         ]);
     }
@@ -61,6 +72,7 @@ class UserResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')->limit(50),
                 Tables\Columns\TextColumn::make('email')->limit(50),
+                Tables\Columns\BooleanColumn::make('administrator'),
             ])
             ->filters([
                 Tables\Filters\Filter::make('created_at')

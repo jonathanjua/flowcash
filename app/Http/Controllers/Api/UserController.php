@@ -43,6 +43,7 @@ class UserController extends Controller
 
         $validated['password'] = Hash::make($validated['password']);
 
+
         $user = User::create($validated);
 
         return new UserResource($user);
@@ -67,7 +68,8 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request, User $user)
     {
-        $this->authorize('update', $user);
+
+        $this->authorize('create', User::class);
 
         $validated = $request->validated();
 

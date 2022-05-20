@@ -81,12 +81,16 @@ class TransactionController extends Controller
         $validated = $request->validated();
 
         $id = $request->id;
-        
-        DB::table('transactions')->where('id', $id)->update($validated);
+
+        $transaction = DB::table('transactions')->where('id', $id)->update($validated);
 
         // $transaction->update($validated);
 
-        return new TransactionResource($transaction);
+        //return new TransactionResource($transaction);
+      return response()->json([
+            'transaction' => $transaction,
+        	'validated'=> $validated
+        ]);
     }
 
     /**
